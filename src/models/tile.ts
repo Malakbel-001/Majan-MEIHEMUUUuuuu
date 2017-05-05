@@ -1,7 +1,7 @@
 export class Tile {
-  x: number;
-  y: number;
-  z: number;
+  xPos: number;
+  yPos: number;
+  zPos: number;
   name: string;
   suit: string;
   matchesWholeSuit: Boolean;

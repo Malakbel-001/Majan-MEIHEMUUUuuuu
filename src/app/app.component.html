@@ -1,10 +1,32 @@
 <h1>{{title}}</h1>
 <h2>My Heroes</h2>
+
+<h3>Create a new game: </h3>
+<label>Template: </label>
+<select [(ngModel)]="selectedTemplate">
+  <option *ngFor="let template of templates"
+    [value]="template.id"
+    (click)="onTemplateSelect(template)">
+        {{template.id}}
+    </option>
+</select>
+<br>
+
+<label>Min. Players: </label>
+<input type="number" min="2" [(ngModel)]="minPlayers"/>
+<br>
+<label>Max. Players: </label>
+<input type="number" min="2" [(ngModel)]="maxPlayers"/>
+
+<br>
+<input (click)="createRoom()" type="button" value="submit"/>
+
 <ul class="rooms">
     <li *ngFor="let room of rooms"
-        [class.selected]="room === selectedRoom"
-        (click)="onSelect(room)">
-        <span class="badge">{{room.id}}</span> {{room.name}}
+        [class.selected]="room === selectedRoom">
+        <span class="badge" (click)="onRoomSelect(room)">{{room.state}}</span> {{room.createdBy.name}}
+        <input [hidden]="room.state != 'open'"
+            type="button" (click)="joinRoom(room)" value="Join"/>
     </li>
 </ul>
 <!--<hero-detail [hero]="selectedRoom"></hero-detail>-->
