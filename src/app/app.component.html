@@ -4,7 +4,7 @@
     <li *ngFor="let room of rooms"
         [class.selected]="room === selectedRoom"
         (click)="onSelect(room)">
-        <span class="badge">{{room.id}}</span> {{room.name}}
+        <span class="badge">{{room.createdBy.name}}</span> {{room.gameTemplate.id}}
     </li>
 </ul>
-<!--<hero-detail [hero]="selectedRoom"></hero-detail>-->
+<room-detail [room]="selectedRoom"></room-detail>
