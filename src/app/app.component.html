@@ -21,6 +21,11 @@
 <br>
 <input (click)="createRoom()" type="button" value="submit"/>
 
+<room-detail [room]="selectedRoom"></room-detail>
+
+<br>
+<h2>Games</h2>
+
 <ul class="rooms">
     <li *ngFor="let room of rooms"
         [class.selected]="room === selectedRoom">
@@ -29,4 +34,3 @@
             type="button" (click)="joinRoom(room)" value="Join"/>
     </li>
 </ul>
-<room-detail [room]="selectedRoom"></room-detail>

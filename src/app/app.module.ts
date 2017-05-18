@@ -17,6 +17,6 @@ import { RoomDetailComponent } from './room-detail.component';
     HttpModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent] // Point of entry for entire application
 })
 export class AppModule { }
