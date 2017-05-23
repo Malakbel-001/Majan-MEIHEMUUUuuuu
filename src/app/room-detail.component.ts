@@ -22,6 +22,10 @@ export class RoomDetailComponent implements OnChanges  {
   maxY: Number;
   maxZ: Number;
 
+  hideDetails(): void{
+    this.room = undefined;
+  }
+
   // On change
   ngOnChanges(changes: SimpleChanges): void{
     if(!this.room) { return; }
@@ -38,6 +42,7 @@ export class RoomDetailComponent implements OnChanges  {
         if(element.zPos > maxZ) { maxZ = element.zPos}
       });
 
+      this.maxX = maxX; this.maxY = maxY; this.maxZ = maxZ;
       console.log("X: " + maxX + ". Y: " + maxY + ". Z: " + maxZ);
 
       // Initialize the array now that we know the sizes
@@ -50,9 +55,12 @@ export class RoomDetailComponent implements OnChanges  {
       }
 
       response.forEach(element => {
-        this.tiles[element.xPos][element.yPos][element.zPos] = element;
+        console.log("X: " + element.xPos + ". Y: " + element.yPos + ". Z: " + element.zPos);
+        console.log("Name: " + element.tile.name)
+        console.log("Suit: " + element.tile.suit)
+        console.log("Mathc: " + element.tile.matchesWholeSuit)
+        this.tiles[element.xPos - 1][element.yPos - 1][element.zPos - 1] = element;
       });
-      this.maxX = maxX; this.maxY = maxY; this.maxZ = maxZ;
     });
 
     this.players = [];

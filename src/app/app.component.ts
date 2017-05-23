@@ -1,9 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Pipe, PipeTransform, OnInit } from '@angular/core';
 
 import { Room } from "../models/room";
 import { Tile } from "../models/tile";
 import { Template } from "../models/template";
 import { HttpService } from "../services/http.service";
+
+@Pipe({name: 'roomFilter'})
+export class RoomFilterPipe implements PipeTransform {
+    transform(value: any, state: String): Room[] {
+      if(!value || !state){ return value; }
+      var rooms = [];
+      value.forEach(element => {
+        if(element.state == state){
+          rooms.push(element);  
+        }
+      });
+      return rooms;
+    }
+}
 
 @Component({
   selector: 'app-root',
@@ -19,6 +33,7 @@ export class AppComponent implements OnInit {
   rooms: Room[];
   selectedRoom: Room;
   selectedTemplate: Template;
+  selectedState: String;
   templates: Template[];
   minPlayers = 2;
   maxPlayers = 5;
@@ -53,6 +68,11 @@ export class AppComponent implements OnInit {
       }
     })
   }
+
+  // ,,
+  // !!! TILE MATCHING LOGICA MOET IN DE CLIENT !!!
+  // ^^
+
   // Works with callback
   isPlayerInRoom(room: Room, callback: (boolean) => void): void { 
     this.httpService.getPlayersByGame(room.id).then(response => {
