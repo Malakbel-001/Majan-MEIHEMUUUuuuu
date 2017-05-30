@@ -3,13 +3,14 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { AppComponent } from './app.component';
+import { AppComponent, RoomFilterPipe} from './app.component';
 import { RoomDetailComponent } from './room-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RoomDetailComponent
+    RoomFilterPipe,
+    RoomDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -17,6 +18,6 @@ import { RoomDetailComponent } from './room-detail.component';
     HttpModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent] // Point of entry for entire application
 })
 export class AppModule { }

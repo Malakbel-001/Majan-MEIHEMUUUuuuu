@@ -1,9 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Pipe, PipeTransform, OnInit } from '@angular/core';
 
 import { Room } from "../models/room";
 import { Tile } from "../models/tile";
 import { Template } from "../models/template";
 import { HttpService } from "../services/http.service";
+
+@Pipe({name: 'roomFilter'})
+export class RoomFilterPipe implements PipeTransform {
+    transform(value: any, state: String): Room[] {
+      if(!value || !state){ return value; }
+      var rooms = [];
+      value.forEach(element => {
+        if(element.state == state){
+          rooms.push(element);  
+        }
+      });
+      return rooms;
+    }
+}
 
 @Component({
   selector: 'app-root',
@@ -12,6 +26,18 @@ import { HttpService } from "../services/http.service";
   providers: [HttpService]
 })
 export class AppComponent implements OnInit {
+
+  constructor(private httpService: HttpService){}
+
+  title = 'Tour of Rooms';
+  rooms: Room[];
+  selectedRoom: Room;
+  selectedTemplate: Template;
+  selectedState: String;
+  templates: Template[];
+  minPlayers = 2;
+  maxPlayers = 5;
+
   ngOnInit(): void{
     this.load()
   }
@@ -23,22 +49,12 @@ export class AppComponent implements OnInit {
     this.selectedRoom = room;
     
     // Show data about which players are in the room
-    this.httpService.getPlayersByGame(room.id).then(response => {
-      let players = "";
-      response.forEach(element => {
-        players += "\n " + element._id
-      });
-      alert("There are " + response.length + " players in this room. \n" + players)
-    });
-
-    // Show data about the tiles
-    // this.httpService.getTilesByGame(room.id).then(response => {
-    //   console.log(response);
-    //   let tiles = "";
+    // this.httpService.getPlayersByGame(room.id).then(response => {
+    //   let players = "";
     //   response.forEach(element => {
-    //     tiles += "\n [" + element.xPos + ", " + element.yPos + ", " + element.zPos + "]"
+    //     players += "\n " + element._id
     //   });
-    //   alert("Tiles: \n" + tiles)
+    //   alert("There are " + response.length + " players in this room. \n" + players)
     // });
   }
   joinRoom(room: Room): void {
@@ -52,6 +68,11 @@ export class AppComponent implements OnInit {
       }
     })
   }
+
+  // ,,
+  // !!! TILE MATCHING LOGICA MOET IN DE CLIENT !!!
+  // ^^
+
   // Works with callback
   isPlayerInRoom(room: Room, callback: (boolean) => void): void { 
     this.httpService.getPlayersByGame(room.id).then(response => {
@@ -78,14 +99,4 @@ export class AppComponent implements OnInit {
       this.httpService.postNewRoom(template, min, max).then(r => alert("Room creation successful!"));
     }
   }
-
-  title = 'Tour of Rooms';
-  rooms: Room[];
-  selectedRoom: Room;
-  selectedTemplate: Template;
-  templates: Template[];
-  minPlayers = 2;
-  maxPlayers = 5;
-
-  constructor(private httpService: HttpService){}
 }

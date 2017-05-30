@@ -1,8 +1,30 @@
 <div *ngIf="room">
-    <h2>{{room.name}} details!</h2>
-    <div><label>id: </label>{{room.id}}</div>
     <div>
-        <label>name: </label>
-        <input [(ngModel)]="room.name" placeholder="name"/>
+        <h2>Details: </h2>
+        <input type="button" (click)="hideDetails()" value="Hide details"/>
     </div>
+    <label>State: </label> {{room.state}}
+    <br>
+    <label>Created on: </label>{{room.createdOn | date}}
+    <br>
+
+    <label>Name: </label>
+    <input [(ngModel)]="room.name" placeholder="name"/>
+    <br>
+
+    <label>Players:</label>
+    <li *ngFor="let player of players">
+        {{player.name}}
+    </li>
+
+    <label>Tiles:</label>
+    <table>
+        <tr *ngFor="let x of tiles">
+            <td *ngFor="let y of x">
+                <div *ngFor="let z of y"> <!-- Select the highest Z -->
+                    <div *ngIf="z">{{z.tile.suit}}</div>
+                </div>
+            </td>
+        </tr>
+    </table>
 </div>
