@@ -18,13 +18,6 @@
     </li>
 
     <label>Tiles:</label>
-    <table>
-        <tr *ngFor="let x of tiles">
-            <td *ngFor="let y of x">
-                <div *ngFor="let z of y"> <!-- Select the highest Z -->
-                    <app-tile [tile]="z"></app-tile>
-                </div>
-            </td>
-        </tr>
-    </table>
+    <app-tile *ngFor="let tile of tilesList" [tile]="tile">
+        </app-tile>
 </div>

@@ -18,6 +18,7 @@ export class RoomDetailComponent implements OnChanges  {
 
   players: Player[];
   tiles: Tile[][][];
+  tilesList: Tile[];
   maxX: Number;
   maxY: Number;
   maxZ: Number;
@@ -55,6 +56,7 @@ export class RoomDetailComponent implements OnChanges  {
       response.forEach(element => {
         this.tiles[element.xPos - 1][element.yPos - 1][element.zPos - 1] = element;
       });
+      this.tilesList = [response[0]];
     });
 
     this.players = [];

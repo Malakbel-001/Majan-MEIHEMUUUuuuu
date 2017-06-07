@@ -23,22 +23,24 @@
 
 <room-detail [room]="selectedRoom"></room-detail>
 
-<br>
-<h2>Games</h2>
+<div *ngIf="!selectedRoom">
+    <br>
+    <h2>Games</h2>
 
-<label>Filter by state: </label>
-<select [(ngModel)]="selectedState"
-    (change)="load()">
-  <option value="open">open</option>
-  <option value="playing">playing</option>
-  <option value="finished">finished</option>
-</select>
-
-<ul class="rooms">
-    <li *ngFor="let room of rooms | roomFilter:selectedState"
-        [class.selected]="room === selectedRoom">
-        <span class="badge" (click)="onRoomSelect(room)">{{room.state}}</span> {{room.createdBy.name}}
-        <input [hidden]="room.state != 'open'"
-            type="button" (click)="joinRoom(room)" value="Join"/>
-    </li>
-</ul>
+    <label>Filter by state: </label>
+    <select [(ngModel)]="selectedState"
+        (change)="load()">
+    <option value="open">open</option>
+    <option value="playing">playing</option>
+    <option value="finished">finished</option>
+    </select>
+    
+    <ul class="rooms" >
+        <li *ngFor="let room of rooms | roomFilter:selectedState"
+            [class.selected]="room === selectedRoom">
+            <span class="badge" (click)="onRoomSelect(room)">{{room.state}}</span> {{room.createdBy.name}}
+            <input [hidden]="room.state != 'open'"
+                type="button" (click)="joinRoom(room)" value="Join"/>
+        </li>
+    </ul>
+</div>

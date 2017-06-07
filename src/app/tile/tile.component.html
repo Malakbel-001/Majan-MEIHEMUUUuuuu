@@ -1,3 +1,6 @@
-<div *ngIf="tile">
-  <p [class.selected]="true">{{tile.tile.suit}}</p>
-</div>
+<div *ngIf="tile" >
+  <img
+  class={{tile.tile.suit}}
+  [style.margin-left.px]="tile.xPos*20"
+  [style.margin-top.px]="tile.yPos*20 + tile.zPos * 2"/>
+</div> 
