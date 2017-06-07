@@ -1,8 +1,8 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { Room } from '../models/room';
-import { Player } from '../models/player';
-import { Tile } from "../models/tile";
-import { HttpService } from "../services/http.service";
+import { Room } from 'models/room';
+import { Player } from 'models/player';
+import { Tile } from "models/tile";
+import { HttpService } from "services/http.service";
 
 @Component({
   selector: 'room-detail',
@@ -34,7 +34,6 @@ export class RoomDetailComponent implements OnChanges  {
      this.tiles = [[[]]];
     // Show data about the tiles
     this.httpService.getTilesByGame(this.room.id).then(response => {
-      console.log(response);
       let maxX = 0, maxY = 0, maxZ = 0;
       response.forEach(element => {
         if(element.xPos > maxX) { maxX = element.xPos}
@@ -43,7 +42,6 @@ export class RoomDetailComponent implements OnChanges  {
       });
 
       this.maxX = maxX; this.maxY = maxY; this.maxZ = maxZ;
-      console.log("X: " + maxX + ". Y: " + maxY + ". Z: " + maxZ);
 
       // Initialize the array now that we know the sizes
       this.tiles = new Array(maxX);
@@ -55,10 +53,6 @@ export class RoomDetailComponent implements OnChanges  {
       }
 
       response.forEach(element => {
-        console.log("X: " + element.xPos + ". Y: " + element.yPos + ". Z: " + element.zPos);
-        console.log("Name: " + element.tile.name)
-        console.log("Suit: " + element.tile.suit)
-        console.log("Mathc: " + element.tile.matchesWholeSuit)
         this.tiles[element.xPos - 1][element.yPos - 1][element.zPos - 1] = element;
       });
     });

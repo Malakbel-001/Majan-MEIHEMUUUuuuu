@@ -4,13 +4,15 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent, RoomFilterPipe} from './app.component';
-import { RoomDetailComponent } from './room-detail.component';
+import { RoomDetailComponent } from './room-detail/room-detail.component';
+import { TileComponent } from './tile/tile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RoomFilterPipe,
     RoomDetailComponent,
+    TileComponent,
   ],
   imports: [
     BrowserModule,

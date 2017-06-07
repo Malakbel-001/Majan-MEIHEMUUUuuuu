@@ -22,7 +22,7 @@
         <tr *ngFor="let x of tiles">
             <td *ngFor="let y of x">
                 <div *ngFor="let z of y"> <!-- Select the highest Z -->
-                    <div *ngIf="z">{{z.tile.suit}}</div>
+                    <app-tile [tile]="z"></app-tile>
                 </div>
             </td>
         </tr>
