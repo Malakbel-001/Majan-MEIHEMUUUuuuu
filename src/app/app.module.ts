@@ -7,7 +7,8 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module'
 import { MenuComponent, RoomFilterPipe} from './menu.component';
-import { RoomDetailComponent } from './room-detail.component';
+import { RoomDetailComponent } from './room-detail/room-detail.component';
+import { TileComponent } from './tile/tile.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { RoomDetailComponent } from './room-detail.component';
     MenuComponent,
     RoomFilterPipe,
     RoomDetailComponent,
+    TileComponent,
   ],
   imports: [
     BrowserModule,
