@@ -18,13 +18,15 @@
     </li>
 
     <label>Tiles:</label>
-    <table>
+    <!--<table>
         <tr *ngFor="let x of tiles">
             <td *ngFor="let y of x">
-                <div *ngFor="let z of y"> <!-- Select the highest Z -->
+                <div *ngFor="let z of y">
                     <div *ngIf="z">{{z.tile.suit}}</div>
                 </div>
             </td>
         </tr>
-    </table>
+    </table>-->
+    <app-tile *ngFor="let tile of tilesList" [tile]="tile">
+        </app-tile>
 </div>
